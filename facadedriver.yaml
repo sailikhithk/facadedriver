@@ -1,0 +1,63 @@
+# FacadeDriver sample configuration.
+# Copy to facadedriver.yaml and edit. Environment variables (${VAR})
+# are expanded automatically.
+
+routes:
+  summarize:
+    primary: gpt-4o-mini
+    fallback:
+      - claude-3-5-sonnet
+      - gemini-1.5-flash
+    retry:
+      count: 2
+      backoff: exponential
+      base_ms: 200
+      max_ms: 10000
+    circuit_breaker:
+      error_rate_threshold: 0.15
+      min_requests: 20
+      cooldown_s: 60
+
+  code-review:
+    primary: claude-3-5-sonnet
+    fallback:
+      - gpt-4o
+      - gemini-1.5-pro
+    retry:
+      count: 1
+      backoff: fixed
+      base_ms: 500
+
+  classify:
+    primary: gemini-1.5-flash
+    fallback:
+      - gpt-4o-mini
+    retry:
+      count: 3
+      backoff: exponential
+      base_ms: 100
+
+providers:
+  openai:
+    api_key: ${OPENAI_API_KEY}
+  anthropic:
+    api_key: ${ANTHROPIC_API_KEY}
+  google:
+    api_key: ${GOOGLE_API_KEY}
+
+backend:
+  type: raw_sdk  # raw_sdk | litellm | custom
+
+telemetry:
+  sinks:
+    - structlog
+  log_cost: true
+  log_latency: true
+  log_tokens: true
+  log_fallback: true
+  prometheus_port: 9090
+
+server:
+  enabled: false
+  host: 0.0.0.0
+  port: 8000

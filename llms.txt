@@ -1,0 +1,44 @@
+# facadedriver
+
+> Model-agnostic orchestration layer for multi-LLM production systems.
+> Source: https://github.com/sailikhithk/facadedriver
+
+FacadeDriver is a Python library that sits between your application code
+and your LLM providers (OpenAI, Anthropic, Google Gemini, and others),
+handling the failure modes that single-provider demos don't cover:
+
+- routing requests to per-route models from a YAML config
+- swapping models at runtime with zero code changes
+- retry with exponential backoff and jitter
+- per-route fallback chains (if Gemini fails, try Claude, then GPT)
+- per-model circuit breakers on error rate, hallucination rate, or p99 latency
+- per-request telemetry (cost, latency, tokens, provider, model, route)
+- pluggable backends (raw provider SDKs or litellm)
+- pluggable telemetry sinks (structlog, Prometheus, Datadog, Loki)
+- sync and async APIs with parity
+- FastAPI server mode for centralizing LLM access across services
+- CLI for ops (swap routes, list routes, replay requests)
+
+## Links
+
+- README: https://github.com/sailikhithk/facadedriver#readme
+- Architecture: https://github.com/sailikhithk/facadedriver/blob/main/docs/ARCHITECTURE.md
+- Quickstart: https://github.com/sailikhithk/facadedriver#quickstart
+- Examples: https://github.com/sailikhithk/facadedriver/tree/main/examples
+- Demo script (the one used in the AI Tinkerers Houston talk):
+  https://github.com/sailikhithk/facadedriver/blob/main/examples/demo.py
+- Tests: https://github.com/sailikhithk/facadedriver/tree/main/tests
+- Benchmarks: https://github.com/sailikhithk/facadedriver/tree/main/benchmarks
+- Changelog: https://github.com/sailikhithk/facadedriver/blob/main/CHANGELOG.md
+- Contributing: https://github.com/sailikhithk/facadedriver/blob/main/CONTRIBUTING.md
+- License: MIT
+
+## Install
+
+```
+pip install facadedriver[all]
+```
+
+## Author
+
+Sai Likhith Kanuparthi (github.com/sailikhithk, sailikhith.me)

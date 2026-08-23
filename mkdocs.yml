@@ -1,0 +1,48 @@
+site_name: FacadeDriver
+site_description: Model-agnostic orchestration for multi-LLM production systems.
+site_url: https://github.com/sailikhithk/facadedriver
+repo_url: https://github.com/sailikhithk/facadedriver
+repo_name: sailikhithk/facadedriver
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.expand
+    - content.code.copy
+    - content.code.annotate
+  palette:
+    - scheme: default
+      primary: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+
+nav:
+  - Home: index.md
+  - Quickstart: quickstart.md
+  - Configuration: configuration.md
+  - Backends: backends.md
+  - Routing: routing.md
+  - Resilience: resilience.md
+  - Telemetry: telemetry.md
+  - Async: async.md
+  - CLI: cli.md
+  - Server: server.md
+  - Plugins: plugins.md
+  - Architecture: architecture.md
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.admonition
+  - footnotes
