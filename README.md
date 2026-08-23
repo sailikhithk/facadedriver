@@ -144,6 +144,10 @@ print(response.circuit_breaker_trip) # True
 
 ## Architecture
 
+FacadeDriver sits between your application code and the LLM providers, exposing a single `generate(route, messages)` API while routing, retrying, falling back, and emitting telemetry under the hood.
+
+> **Visual diagram:** Open [`docs/architecture-diagram.html`](docs/architecture-diagram.html) in a browser for the full SVG architecture diagram (dark-themed, self-contained, no JS).
+
 ```
 Application code
        |
@@ -175,7 +179,7 @@ Application code
     |-- Datadog / Loki / custom sink
 ```
 
-See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the full design.
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the full design and [`docs/architecture-diagram.html`](docs/architecture-diagram.html) for the visual diagram.
 
 ## Why not just use litellm / langchain?
 
