@@ -40,6 +40,8 @@ FacadeDriver.generate(route, messages)
 Response (content, model, cost, latency, fallback_chain, request_id)
 ```
 
+> Visual companion: [01 - Routing](docs/diagrams/01-routing.svg.html) - request flow from route to model chain.
+
 ## Module layout
 
 ```
@@ -61,6 +63,9 @@ src/facadedriver/
   prometheus.py      - PrometheusSink + metrics server
 ```
 
+> Visual companion: [06 - Async](docs/diagrams/06-async.svg.html) - sync and async execution paths side by side.
+> Visual companion: [07 - Plugins](docs/diagrams/07-plugins.svg.html) - plugin discovery, loading, and extension points.
+
 ## Key design decisions
 
 ### Routes, not models
@@ -70,12 +75,16 @@ a model chain. Application code uses route names. This decouples the
 call site from the provider and model, enabling runtime swaps and
 fallbacks without code changes.
 
+> Visual companion: [03 - Fallback chain](docs/diagrams/03-fallback-chain.svg.html) - primary to fallback model progression on failure.
+
 ### Per-model circuit breaker
 
 The circuit breaker is keyed by model, not by route. A model can
 appear in multiple routes; its health is global. This prevents one
 route from hammering a failing model while another route's breaker is
 still closed.
+
+> Visual companion: [02 - Circuit breaker](docs/diagrams/02-circuit-breaker.svg.html) - per-model state machine (closed, open, half-open).
 
 ### Backend as protocol
 
@@ -84,10 +93,14 @@ still closed.
 that method is a valid backend. This makes it trivial to add new
 providers or wrap existing SDKs.
 
+> Visual companion: [05 - Backends](docs/diagrams/05-backends.svg.html) - RawSDK, LiteLLM, Mock, and custom plugin backends.
+
 ### Telemetry never breaks the request
 
 The driver wraps `sink.emit()` in a try/except. A broken telemetry
 sink (e.g. a full disk) must never cause a user-facing failure.
+
+> Visual companion: [04 - Telemetry](docs/diagrams/04-telemetry.svg.html) - event emission across the request lifecycle.
 
 ### Lazy SDK imports
 
