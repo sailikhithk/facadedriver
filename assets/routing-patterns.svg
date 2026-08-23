@@ -1,133 +1,147 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 520" width="100%" height="auto" role="img" aria-label="FacadeDriver routing patterns: round-robin, least-latency, weighted, and sticky-session routing across multiple LLM providers">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 545" width="100%" height="auto" role="img" aria-label="FacadeDriver routing patterns: round-robin, least-latency, weighted, and sticky-session routing across multiple LLM providers">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+  </defs>
   <style>
     .title { font-family: -apple-system, Segoe UI, Helvetica, sans-serif; font-size: 22px; font-weight: 700; fill: #0f172a; text-anchor: middle; }
     .subtitle { font-family: -apple-system, Segoe UI, Helvetica, sans-serif; font-size: 12px; fill: #475569; text-anchor: middle; }
-    .card-label { font-family: -apple-system, Segoe UI, Helvetica, sans-serif; font-size: 13px; font-weight: 600; fill: #1e293b; text-anchor: middle; }
+    .card-label { font-family: -apple-system, Segoe UI, Helvetica, sans-serif; font-size: 15px; font-weight: 700; fill: #1e293b; }
     .card-desc { font-family: -apple-system, Segoe UI, Helvetica, sans-serif; font-size: 11px; fill: #475569; }
-    .bullet { font-family: -apple-system, Segoe UI, Helvetica, sans-serif; font-size: 10px; fill: #64748b; }
-    .bestfor { font-family: -apple-system, Segoe UI, Helvetica, sans-serif; font-size: 10px; font-weight: 600; fill: #1e293b; }
-    .number { font-family: -apple-system, Segoe UI, Helvetica, sans-serif; font-size: 16px; font-weight: 700; }
-    .icon { fill: #fff; }
+    .bullet { font-family: -apple-system, Segoe UI, Helvetica, sans-serif; font-size: 10px; fill: #475569; }
+    .best-label { font-family: -apple-system, Segoe UI, Helvetica, sans-serif; font-size: 11px; font-weight: 700; fill: #1e293b; text-anchor: middle; }
+    .best-text { font-family: -apple-system, Segoe UI, Helvetica, sans-serif; font-size: 10px; fill: #475569; text-anchor: middle; }
+    .number { font-family: -apple-system, Segoe UI, Helvetica, sans-serif; font-size: 15px; font-weight: 700; }
+    .inner { font-family: -apple-system, Segoe UI, Helvetica, sans-serif; font-size: 10px; fill: #475569; text-anchor: middle; }
     @media (prefers-color-scheme: dark) {
       .title { fill: #f1f5f9; }
       .subtitle { fill: #94a3b8; }
       .card-label { fill: #e2e8f0; }
       .card-desc { fill: #cbd5e1; }
-      .bullet { fill: #94a3b8; }
-      .bestfor { fill: #e2e8f0; }
+      .bullet { fill: #cbd5e1; }
+      .best-label { fill: #e2e8f0; }
+      .best-text { fill: #cbd5e1; }
+      .inner { fill: #cbd5e1; }
     }
   </style>
 
-  <text x="440" y="32" class="title">FacadeDriver Routing Patterns</text>
-  <text x="440" y="52" class="subtitle">4 ways to pick the right LLM provider for every request</text>
+  <text x="550" y="32" class="title">FacadeDriver Routing Patterns</text>
+  <text x="550" y="52" class="subtitle">4 ways to pick the right LLM provider for every request</text>
 
   <!-- Card 1: Round Robin -->
-  <rect x="20" y="75" width="200" height="380" rx="12" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
-  <circle cx="70" cy="108" r="15" fill="#22c55e"/>
-  <text x="70" y="114" class="number" fill="#fff" text-anchor="middle">1</text>
-  <text x="120" y="114" class="card-label" text-anchor="start">Round Robin</text>
-  <text x="35" y="138" class="card-desc">Cycle through providers one at a time in order.</text>
+  <rect x="40" y="75" width="240" height="470" rx="14" fill="#f0fdf4" stroke="#22c55e" stroke-width="2.5"/>
+  <circle cx="64" cy="108" r="13" fill="#22c55e"/>
+  <text x="64" y="113" class="number" fill="#fff" text-anchor="middle">1</text>
+  <text x="88" y="113" class="card-label">Round Robin</text>
+  <text x="58" y="140" class="card-desc">Cycle through providers in a fixed order.
+    <tspan x="58" dy="15">Simple and predictable.</tspan>
+  </text>
 
-  <rect x="45" y="160" width="150" height="80" rx="6" fill="#dcfce7" stroke="#86efac"/>
-  <circle cx="120" cy="180" r="12" fill="#22c55e" opacity="0.15"/>
-  <text x="120" y="185" class="card-desc" text-anchor="middle" fill="#15803d">LB</text>
-  <line x1="70" y1="205" x2="60" y2="225" stroke="#22c55e" stroke-width="1.5"/>
-  <line x1="120" y1="205" x2="120" y2="225" stroke="#22c55e" stroke-width="1.5"/>
-  <line x1="170" y1="205" x2="180" y2="225" stroke="#22c55e" stroke-width="1.5"/>
-  <rect x="45" y="225" width="30" height="22" rx="3" fill="#86efac"/>
-  <rect x="105" y="225" width="30" height="22" rx="3" fill="#86efac"/>
-  <rect x="165" y="225" width="30" height="22" rx="3" fill="#86efac"/>
-  <text x="60" y="250" class="card-desc" text-anchor="middle" font-size="9">OpenAI</text>
-  <text x="120" y="250" class="card-desc" text-anchor="middle" font-size="9">Claude</text>
-  <text x="180" y="250" class="card-desc" text-anchor="middle" font-size="9">Bedrock</text>
+  <rect x="58" y="175" width="204" height="110" rx="8" fill="#dcfce7" stroke="#86efac" stroke-width="1.5"/>
+  <g transform="translate(58, 175)">
+    <circle cx="102" cy="22" r="10" fill="#22c55e"/>
+    <rect x="15" y="45" width="55" height="32" rx="4" fill="#86efac"/>
+    <rect x="75" y="45" width="55" height="32" rx="4" fill="#86efac"/>
+    <rect x="135" y="45" width="55" height="32" rx="4" fill="#86efac"/>
+    <line x1="70" y1="61" x2="75" y2="61" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <line x1="130" y1="61" x2="135" y2="61" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <text x="42" y="92" class="inner" style="font-size:9px">OpenAI</text>
+    <text x="102" y="92" class="inner" style="font-size:9px">Claude</text>
+    <text x="162" y="92" class="inner" style="font-size:9px">Bedrock</text>
+  </g>
 
-  <text x="35" y="280" class="bullet">• Simple, no telemetry needed</text>
-  <text x="35" y="300" class="bullet">• Best for uniform providers</text>
-  <text x="35" y="320" class="bullet">• Ignores latency and cost</text>
+  <text x="58" y="313" class="bullet">• Simple, no telemetry needed</text>
+  <text x="58" y="328" class="bullet">• Best when providers are uniform</text>
+  <text x="58" y="343" class="bullet">• Ignores latency and cost</text>
 
-  <rect x="35" y="350" width="170" height="80" rx="6" fill="#dcfce7" stroke="#bbf7d0"/>
-  <text x="120" y="370" class="bestfor" text-anchor="middle">Best for</text>
-  <text x="120" y="390" class="bullet" text-anchor="middle">Dev / test environments</text>
-  <text x="120" y="405" class="bullet" text-anchor="middle">where providers are</text>
-  <text x="120" y="420" class="bullet" text-anchor="middle">interchangeable</text>
+  <rect x="58" y="420" width="204" height="100" rx="8" fill="#dcfce7" stroke="#bbf7d0" stroke-width="1.5"/>
+  <text x="160" y="442" class="best-label">Best for</text>
+  <text x="160" y="462" class="best-text">Dev and test environments</text>
+  <text x="160" y="477" class="best-text">with interchangeable providers</text>
 
   <!-- Card 2: Least Latency -->
-  <rect x="230" y="75" width="200" height="380" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
-  <circle cx="280" cy="108" r="15" fill="#3b82f6"/>
-  <text x="280" y="114" class="number" fill="#fff" text-anchor="middle">2</text>
-  <text x="330" y="114" class="card-label" text-anchor="start">Least Latency</text>
-  <text x="245" y="138" class="card-desc">Route to the provider with the lowest p99 latency.</text>
+  <rect x="300" y="75" width="240" height="470" rx="14" fill="#eff6ff" stroke="#3b82f6" stroke-width="2.5"/>
+  <circle cx="324" cy="108" r="13" fill="#3b82f6"/>
+  <text x="324" y="113" class="number" fill="#fff" text-anchor="middle">2</text>
+  <text x="348" y="113" class="card-label">Least Latency</text>
+  <text x="318" y="140" class="card-desc">Route to the provider with the lowest
+    <tspan x="318" dy="15">p99 latency.</tspan>
+  </text>
 
-  <rect x="255" y="160" width="150" height="80" rx="6" fill="#dbeafe" stroke="#93c5fd"/>
-  <circle cx="330" cy="180" r="12" fill="#3b82f6" opacity="0.15"/>
-  <text x="330" y="185" class="card-desc" text-anchor="middle" fill="#1d4ed8">LB</text>
-  <text x="275" y="218" class="card-desc" font-size="9" font-weight="600" fill="#1d4ed8">p99: 120ms</text>
-  <text x="330" y="218" class="card-desc" font-size="9" font-weight="600" fill="#1d4ed8">p99: 95ms</text>
-  <text x="385" y="218" class="card-desc" font-size="9" font-weight="600" fill="#1d4ed8">p99: 145ms</text>
-  <line x1="330" y1="205" x2="330" y2="228" stroke="#3b82f6" stroke-width="2"/>
-  <text x="330" y="250" class="card-desc" text-anchor="middle" font-size="9" font-weight="600" fill="#1d4ed8">Claude wins</text>
+  <rect x="318" y="175" width="204" height="110" rx="8" fill="#dbeafe" stroke="#93c5fd" stroke-width="1.5"/>
+  <g transform="translate(318, 175)">
+    <text x="102" y="25" class="inner" style="font-size:10px; fill:#1d4ed8">p99 latency</text>
+    <rect x="25" y="42" width="154" height="22" rx="4" fill="#93c5fd" opacity="0.4"/>
+    <text x="102" y="57" class="inner" style="font-size:10px; font-weight:600; fill:#1d4ed8">Claude: 95ms (winner)</text>
+    <text x="102" y="82" class="inner" style="font-size:9px">OpenAI: 120ms</text>
+    <text x="102" y="98" class="inner" style="font-size:9px">Bedrock: 145ms</text>
+  </g>
 
-  <text x="245" y="280" class="bullet">• Uses OTel latency metrics</text>
-  <text x="245" y="300" class="bullet">• Great for user-facing apps</text>
-  <text x="245" y="320" class="bullet">• Needs warm moving window</text>
+  <text x="318" y="313" class="bullet">• Uses OTel latency metrics</text>
+  <text x="318" y="328" class="bullet">• Best for user-facing apps</text>
+  <text x="318" y="343" class="bullet">• Needs a warm moving window</text>
 
-  <rect x="245" y="350" width="170" height="80" rx="6" fill="#dbeafe" stroke="#bfdbfe"/>
-  <text x="330" y="370" class="bestfor" text-anchor="middle">Best for</text>
-  <text x="330" y="390" class="bullet" text-anchor="middle">Low-latency SLOs</text>
-  <text x="330" y="405" class="bullet" text-anchor="middle">with latency-aware</text>
-  <text x="330" y="420" class="bullet" text-anchor="middle">providers</text>
+  <rect x="318" y="420" width="204" height="100" rx="8" fill="#dbeafe" stroke="#bfdbfe" stroke-width="1.5"/>
+  <text x="420" y="442" class="best-label">Best for</text>
+  <text x="420" y="462" class="best-text">Low-latency SLOs with</text>
+  <text x="420" y="477" class="best-text">latency-aware providers</text>
 
   <!-- Card 3: Weighted -->
-  <rect x="440" y="75" width="200" height="380" rx="12" fill="#fffbeb" stroke="#f59e0b" stroke-width="2"/>
-  <circle cx="490" cy="108" r="15" fill="#f59e0b"/>
-  <text x="490" y="114" class="number" fill="#fff" text-anchor="middle">3</text>
-  <text x="540" y="114" class="card-label" text-anchor="start">Weighted</text>
-  <text x="455" y="138" class="card-desc">Split traffic by capacity, cost, or quota targets.</text>
+  <rect x="560" y="75" width="240" height="470" rx="14" fill="#fffbeb" stroke="#f59e0b" stroke-width="2.5"/>
+  <circle cx="584" cy="108" r="13" fill="#f59e0b"/>
+  <text x="584" y="113" class="number" fill="#fff" text-anchor="middle">3</text>
+  <text x="608" y="113" class="card-label">Weighted</text>
+  <text x="578" y="140" class="card-desc">Split traffic by capacity, cost budget,
+    <tspan x="578" dy="15">or quota target.</tspan>
+  </text>
 
-  <rect x="465" y="160" width="150" height="80" rx="6" fill="#fef3c7" stroke="#fcd34d"/>
-  <rect x="470" y="168" width="40" height="55" rx="3" fill="#fbbf24" opacity="0.7"/>
-  <rect x="515" y="168" width="30" height="55" rx="3" fill="#fbbf24" opacity="0.5"/>
-  <rect x="550" y="168" width="55" height="55" rx="3" fill="#fbbf24" opacity="0.85"/>
-  <text x="490" y="210" class="card-desc" text-anchor="middle" font-size="9" fill="#92400e">40%</text>
-  <text x="530" y="210" class="card-desc" text-anchor="middle" font-size="9" fill="#92400e">25%</text>
-  <text x="577" y="210" class="card-desc" text-anchor="middle" font-size="9" fill="#92400e">35%</text>
+  <rect x="578" y="175" width="204" height="110" rx="8" fill="#fef3c7" stroke="#fcd34d" stroke-width="1.5"/>
+  <g transform="translate(578, 175)">
+    <rect x="30" y="35" width="35" height="50" rx="3" fill="#fbbf24" opacity="0.8"/>
+    <rect x="85" y="55" width="22" height="30" rx="3" fill="#fbbf24" opacity="0.55"/>
+    <rect x="140" y="41" width="31" height="44" rx="3" fill="#fbbf24" opacity="0.7"/>
+    <text x="47" y="95" class="inner" style="font-size:9px; fill:#92400e">40%</text>
+    <text x="96" y="95" class="inner" style="font-size:9px; fill:#92400e">25%</text>
+    <text x="155" y="95" class="inner" style="font-size:9px; fill:#92400e">35%</text>
+  </g>
 
-  <text x="455" y="280" class="bullet">• Honors quota/cost budgets</text>
-  <text x="455" y="300" class="bullet">• Scales with usage limits</text>
-  <text x="455" y="320" class="bullet">• Adjusts in config, no code</text>
+  <text x="578" y="313" class="bullet">• Honors quota and cost budgets</text>
+  <text x="578" y="328" class="bullet">• Scales with usage limits</text>
+  <text x="578" y="343" class="bullet">• Adjusts in YAML, no code</text>
 
-  <rect x="455" y="350" width="170" height="80" rx="6" fill="#fef3c7" stroke="#fde68a"/>
-  <text x="540" y="370" class="bestfor" text-anchor="middle">Best for</text>
-  <text x="540" y="390" class="bullet" text-anchor="middle">Production with mixed</text>
-  <text x="540" y="405" class="bullet" text-anchor="middle">provider contracts and</text>
-  <text x="540" y="420" class="bullet" text-anchor="middle">cost targets</text>
+  <rect x="578" y="420" width="204" height="100" rx="8" fill="#fef3c7" stroke="#fde68a" stroke-width="1.5"/>
+  <text x="680" y="442" class="best-label">Best for</text>
+  <text x="680" y="462" class="best-text">Production with mixed contracts</text>
+  <text x="680" y="477" class="best-text">and cost targets</text>
 
-  <!-- Card 4: Sticky / Fallback -->
-  <rect x="650" y="75" width="200" height="380" rx="12" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="2"/>
-  <circle cx="700" cy="108" r="15" fill="#8b5cf6"/>
-  <text x="700" y="114" class="number" fill="#fff" text-anchor="middle">4</text>
-  <text x="750" y="114" class="card-label" text-anchor="start">Sticky + Fallback</text>
-  <text x="665" y="138" class="card-desc">Keep a session on one model, fall back on failure.</text>
+  <!-- Card 4: Sticky + Fallback -->
+  <rect x="820" y="75" width="240" height="470" rx="14" fill="#fdf2f8" stroke="#ec4899" stroke-width="2.5"/>
+  <circle cx="844" cy="108" r="13" fill="#ec4899"/>
+  <text x="844" y="113" class="number" fill="#fff" text-anchor="middle">4</text>
+  <text x="868" y="113" class="card-label">Sticky + Fallback</text>
+  <text x="838" y="140" class="card-desc">Keep a session on one model and fall
+    <tspan x="838" dy="15">back through a chain on failure.</tspan>
+  </text>
 
-  <rect x="675" y="160" width="150" height="80" rx="6" fill="#ede9fe" stroke="#c4b5fd"/>
-  <circle cx="750" cy="180" r="12" fill="#8b5cf6" opacity="0.15"/>
-  <text x="750" y="185" class="card-desc" text-anchor="middle" fill="#6d28d9">LB</text>
-  <line x1="720" y1="205" x2="705" y2="228" stroke="#8b5cf6" stroke-width="1.5"/>
-  <line x1="780" y1="205" x2="795" y2="228" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="3,3"/>
-  <rect x="690" y="228" width="30" height="22" rx="3" fill="#c4b5fd"/>
-  <rect x="780" y="228" width="30" height="22" rx="3" fill="#ddd6fe"/>
-  <text x="705" y="250" class="card-desc" text-anchor="middle" font-size="9">primary</text>
-  <text x="795" y="250" class="card-desc" text-anchor="middle" font-size="9">fallback</text>
+  <rect x="838" y="175" width="204" height="110" rx="8" fill="#fce7f3" stroke="#f9a8d4" stroke-width="1.5"/>
+  <g transform="translate(838, 175)">
+    <rect x="25" y="30" width="65" height="40" rx="4" fill="#c4b5fd"/>
+    <rect x="115" y="30" width="65" height="40" rx="4" fill="#ddd6fe"/>
+    <line x1="90" y1="50" x2="115" y2="50" stroke="#8b5cf6" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+    <text x="57" y="90" class="inner" style="font-size:9px">primary</text>
+    <text x="147" y="90" class="inner" style="font-size:9px">fallback</text>
+    <text x="102" y="104" class="inner" style="font-size:8px">OpenAI → Claude → Bedrock</text>
+  </g>
 
-  <text x="665" y="280" class="bullet">• Maintains conversation state</text>
-  <text x="665" y="300" class="bullet">• Configurable fallback chain</text>
-  <text x="665" y="320" class="bullet">• Retry with backoff</text>
+  <text x="838" y="313" class="bullet">• Maintains conversation state</text>
+  <text x="838" y="328" class="bullet">• Configurable fallback chain</text>
+  <text x="838" y="343" class="bullet">• Retry with backoff</text>
 
-  <rect x="665" y="350" width="170" height="80" rx="6" fill="#ede9fe" stroke="#ddd6fe"/>
-  <text x="750" y="370" class="bestfor" text-anchor="middle">Best for</text>
-  <text x="750" y="390" class="bullet" text-anchor="middle">Stateful agents and</text>
-  <text x="750" y="405" class="bullet" text-anchor="middle">resilient production</text>
-  <text x="750" y="420" class="bullet" text-anchor="middle">workloads</text>
+  <rect x="838" y="420" width="204" height="100" rx="8" fill="#fce7f3" stroke="#fbcfe8" stroke-width="1.5"/>
+  <text x="940" y="442" class="best-label">Best for</text>
+  <text x="940" y="462" class="best-text">Stateful agents and resilient</text>
+  <text x="940" y="477" class="best-text">production workloads</text>
 
-  <text x="440" y="490" class="subtitle">FacadeDriver lets you mix these per route via a single YAML config.</text>
+  <text x="550" y="535" class="subtitle">Mix any of these per route through a single YAML config.</text>
 </svg>
