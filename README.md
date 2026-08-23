@@ -9,6 +9,10 @@
 [![Tests](https://img.shields.io/badge/tests-passing-green.svg)](https://github.com/sailikhithk/facadedriver/actions)
 [![PyPI](https://img.shields.io/badge/PyPI-0.1.0-blue.svg)](https://pypi.org/project/facadedriver/)
 
+<p align="center">
+  <img src="assets/architecture.svg" alt="FacadeDriver architecture: request routing with retry, fallback, circuit breakers, and per-request telemetry across OpenAI, Anthropic, AWS Bedrock, and vLLM" width="100%">
+</p>
+
 ## Why
 
 Production LLM systems fail in ways single-provider demos don't. A provider
