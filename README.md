@@ -146,40 +146,36 @@ print(response.circuit_breaker_trip) # True
 
 FacadeDriver sits between your application code and the LLM providers, exposing a single `generate(route, messages)` API while routing, retrying, falling back, and emitting telemetry under the hood.
 
-> **Visual diagram:** Open [`docs/architecture-diagram.html`](docs/architecture-diagram.html) in a browser for the full SVG architecture diagram (dark-themed, self-contained, no JS).
+```mermaid
+flowchart TD
+    APP["Application code<br/>driver.generate(route, messages)"]
+    DRIVER["FacadeDriver<br/>single entry point<br/>sync + async parity"]
+    ROUTER["Router<br/>route name -> model chain<br/>live-swapable via driver.swap()"]
+    CONFIG["routes.yaml<br/>routes, fallback, retry,<br/>circuit_breaker, providers"]
+    RESILIENCE["Resilience layer<br/>retry (exp backoff + jitter)<br/>fallback chain (per-route)<br/>circuit breaker (per-model)"]
+    BACKEND["Backend (pluggable)<br/>RawSDKBackend / LiteLLMBackend / Custom"]
+    PROVIDERS["Provider APIs<br/>openai / anthropic / google / vLLM / Ollama"]
+    TELEMETRY["Telemetry layer<br/>structlog / Prometheus / Datadog / Loki / custom"]
 
-```
-Application code
-       |
-       v
-  FacadeDriver.generate(route="summarization", messages=[...])
-       |
-       v
-  Router  ----reads--->  routes.yaml (live-swapable)
-       |
-       v
-  Resilience layer
-    |-- retry (exponential backoff + jitter)
-    |-- fallback chain (per-route ordered list)
-    |-- circuit breaker (per-model, error/hallucination/latency)
-       |
-       v
-  Backend (pluggable)
-    |-- RawSDKBackend (openai, anthropic, google-generativeai)
-    |-- LiteLLMBackend (litellm)
-    |-- CustomBackend (your plugin)
-       |
-       v
-  Provider APIs
-       |
-       v
-  Telemetry layer
-    |-- structured log (structlog)
-    |-- Prometheus metrics
-    |-- Datadog / Loki / custom sink
+    APP --> DRIVER
+    DRIVER --> ROUTER
+    ROUTER -.->|"reads"| CONFIG
+    ROUTER --> RESILIENCE
+    RESILIENCE --> BACKEND
+    BACKEND --> PROVIDERS
+    DRIVER -.->|"emits event"| TELEMETRY
+
+    style APP fill:#78350f,stroke:#fbbf24,stroke-width:2px,color:#fff
+    style DRIVER fill:#083344,stroke:#22d3ee,stroke-width:2px,color:#fff
+    style ROUTER fill:#4c1d95,stroke:#a78bfa,stroke-width:2px,color:#fff
+    style CONFIG fill:#1f2937,stroke:#9ca3af,color:#fff
+    style RESILIENCE fill:#881337,stroke:#fb7185,stroke-width:2px,color:#fff
+    style BACKEND fill:#064e3b,stroke:#34d399,stroke-width:2px,color:#fff
+    style PROVIDERS fill:#1f2937,stroke:#9ca3af,color:#fff
+    style TELEMETRY fill:#78350f,stroke:#fbbf24,stroke-width:2px,color:#fff
 ```
 
-See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the full design and [`docs/architecture-diagram.html`](docs/architecture-diagram.html) for the visual diagram.
+See [ARCHITECTURE.md](ARCHITECTURE.md) for the full design with diagrams for each subsystem (routing, circuit breaker, fallback chain, telemetry, backends, async, plugins).
 
 ## Why not just use litellm / langchain?
 
