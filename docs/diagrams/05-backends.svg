@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 620">
+        <defs>
+          <marker id="05_backends__arrow-cyan" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#22d3ee" />
+          </marker>
+          <marker id="05_backends__arrow-emerald" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#34d399" />
+          </marker>
+          <marker id="05_backends__arrow-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#fbbf24" />
+          </marker>
+          <marker id="05_backends__arrow-violet" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#a78bfa" />
+          </marker>
+          <marker id="05_backends__arrow-rose" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#fb7185" />
+          </marker>
+          <pattern id="05_backends__grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+
+        <rect width="100%" height="100%" fill="url(#05_backends__grid)" />
+
+        <!-- Driver -->
+        <rect x="380" y="30" width="240" height="60" rx="10" fill="rgba(120, 53, 15, 0.3)" stroke="#fbbf24" stroke-width="2"/>
+        <text x="500" y="56" fill="white" font-size="12" font-weight="700" text-anchor="middle">FacadeDriver</text>
+        <text x="500" y="74" fill="#94a3b8" font-size="9" text-anchor="middle">calls backend.generate(req)</text>
+
+        <!-- Backend Protocol -->
+        <rect x="320" y="130" width="360" height="120" rx="10" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="2"/>
+        <text x="500" y="158" fill="white" font-size="13" font-weight="700" text-anchor="middle">Backend (Protocol)</text>
+        <text x="500" y="178" fill="#22d3ee" font-size="9" text-anchor="middle">@runtime_checkable</text>
+        <text x="500" y="198" fill="#94a3b8" font-size="9" text-anchor="middle">def generate(self, req: Request) -> Response</text>
+        <text x="500" y="214" fill="#94a3b8" font-size="9" text-anchor="middle">def stream(self, req: Request) -> Iterator[Chunk]</text>
+        <text x="500" y="230" fill="#94a3b8" font-size="9" text-anchor="middle">def health(self) -> HealthStatus</text>
+        <text x="500" y="246" fill="#94a3b8" font-size="9" text-anchor="middle">name: str, capabilities: set[Capability]</text>
+
+        <path d="M 500 90 L 500 128" fill="none" stroke="#22d3ee" stroke-width="2" marker-end="url(#05_backends__arrow-cyan)"/>
+
+        <!-- Implementations -->
+        <rect x="40" y="300" width="180" height="140" rx="10" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="130" y="326" fill="white" font-size="11" font-weight="700" text-anchor="middle">AnthropicBackend</text>
+        <text x="130" y="346" fill="#34d399" font-size="8" text-anchor="middle">implements Backend</text>
+        <text x="130" y="366" fill="#94a3b8" font-size="8" text-anchor="middle">messages API</text>
+        <text x="130" y="382" fill="#94a3b8" font-size="8" text-anchor="middle">system + tools</text>
+        <text x="130" y="398" fill="#94a3b8" font-size="8" text-anchor="middle">prompt caching</text>
+        <text x="130" y="414" fill="#94a3b8" font-size="8" text-anchor="middle">streaming via SSE</text>
+        <text x="130" y="430" fill="#94a3b8" font-size="8" text-anchor="middle">caps: {tools, vision}</text>
+
+        <rect x="240" y="300" width="180" height="140" rx="10" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+        <text x="330" y="326" fill="white" font-size="11" font-weight="700" text-anchor="middle">OpenAIBackend</text>
+        <text x="330" y="346" fill="#22d3ee" font-size="8" text-anchor="middle">implements Backend</text>
+        <text x="330" y="366" fill="#94a3b8" font-size="8" text-anchor="middle">chat.completions</text>
+        <text x="330" y="382" fill="#94a3b8" font-size="8" text-anchor="middle">function calling</text>
+        <text x="330" y="398" fill="#94a3b8" font-size="8" text-anchor="middle">json mode</text>
+        <text x="330" y="414" fill="#94a3b8" font-size="8" text-anchor="middle">streaming via SSE</text>
+        <text x="330" y="430" fill="#94a3b8" font-size="8" text-anchor="middle">caps: {tools, json}</text>
+
+        <rect x="440" y="300" width="180" height="140" rx="10" fill="rgba(120, 53, 15, 0.3)" stroke="#fbbf24" stroke-width="1.5"/>
+        <text x="530" y="326" fill="white" font-size="11" font-weight="700" text-anchor="middle">GeminiBackend</text>
+        <text x="530" y="346" fill="#fbbf24" font-size="8" text-anchor="middle">implements Backend</text>
+        <text x="530" y="366" fill="#94a3b8" font-size="8" text-anchor="middle">generateContent</text>
+        <text x="530" y="382" fill="#94a3b8" font-size="8" text-anchor="middle">function declarations</text>
+        <text x="530" y="398" fill="#94a3b8" font-size="8" text-anchor="middle">multimodal inline</text>
+        <text x="530" y="414" fill="#94a3b8" font-size="8" text-anchor="middle">streaming via SSE</text>
+        <text x="530" y="430" fill="#94a3b8" font-size="8" text-anchor="middle">caps: {tools, vision}</text>
+
+        <rect x="640" y="300" width="180" height="140" rx="10" fill="rgba(76, 29, 149, 0.3)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="730" y="326" fill="white" font-size="11" font-weight="700" text-anchor="middle">OllamaBackend</text>
+        <text x="730" y="346" fill="#a78bfa" font-size="8" text-anchor="middle">implements Backend</text>
+        <text x="730" y="366" fill="#94a3b8" font-size="8" text-anchor="middle">/api/chat</text>
+        <text x="730" y="382" fill="#94a3b8" font-size="8" text-anchor="middle">local models</text>
+        <text x="730" y="398" fill="#94a3b8" font-size="8" text-anchor="middle">no auth, no rate limit</text>
+        <text x="730" y="414" fill="#94a3b8" font-size="8" text-anchor="middle">streaming via NDJSON</text>
+        <text x="730" y="430" fill="#94a3b8" font-size="8" text-anchor="middle">caps: {local}</text>
+
+        <rect x="840" y="300" width="120" height="140" rx="10" fill="rgba(136, 19, 55, 0.4)" stroke="#fb7185" stroke-width="1.5"/>
+        <text x="900" y="326" fill="white" font-size="11" font-weight="700" text-anchor="middle">Custom</text>
+        <text x="900" y="346" fill="#fb7185" font-size="8" text-anchor="middle">implements Backend</text>
+        <text x="900" y="366" fill="#94a3b8" font-size="8" text-anchor="middle">user-defined</text>
+        <text x="900" y="382" fill="#94a3b8" font-size="8" text-anchor="middle">internal API</text>
+        <text x="900" y="398" fill="#94a3b8" font-size="8" text-anchor="middle">vLLM, TGI, etc.</text>
+        <text x="900" y="414" fill="#94a3b8" font-size="8" text-anchor="middle">drop-in</text>
+        <text x="900" y="430" fill="#94a3b8" font-size="8" text-anchor="middle">caps: {...}</text>
+
+        <!-- Arrows from protocol to impls -->
+        <path d="M 380 250 Q 200 270 130 298" fill="none" stroke="#34d399" stroke-width="1.5" marker-end="url(#05_backends__arrow-emerald)"/>
+        <path d="M 440 250 Q 380 270 330 298" fill="none" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#05_backends__arrow-cyan)"/>
+        <path d="M 560 250 Q 560 270 530 298" fill="none" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#05_backends__arrow-amber)"/>
+        <path d="M 620 250 Q 700 270 730 298" fill="none" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#05_backends__arrow-violet)"/>
+        <path d="M 680 250 Q 820 270 900 298" fill="none" stroke="#fb7185" stroke-width="1.5" marker-end="url(#05_backends__arrow-rose)"/>
+
+        <!-- Request/Response shapes -->
+        <rect x="60" y="480" width="440" height="120" rx="10" fill="rgba(15, 23, 42, 0.5)" stroke="#1e293b" stroke-width="1.5"/>
+        <text x="80" y="506" fill="white" font-size="11" font-weight="600">Request (provider-agnostic)</text>
+        <text x="80" y="524" fill="#94a3b8" font-size="8">messages: list[Message], system: str, tools: list[Tool]</text>
+        <text x="80" y="540" fill="#94a3b8" font-size="8">temperature, max_tokens, stop, json_schema</text>
+        <text x="80" y="556" fill="#94a3b8" font-size="8">stream: bool, metadata: dict</text>
+        <text x="80" y="572" fill="#34d399" font-size="8">-> every backend accepts the same shape</text>
+        <text x="80" y="588" fill="#94a3b8" font-size="8">backend translates to its native format internally</text>
+
+        <rect x="520" y="480" width="440" height="120" rx="10" fill="rgba(15, 23, 42, 0.5)" stroke="#1e293b" stroke-width="1.5"/>
+        <text x="540" y="506" fill="white" font-size="11" font-weight="600">Response (provider-agnostic)</text>
+        <text x="540" y="524" fill="#94a3b8" font-size="8">content: str, tool_calls: list[ToolCall]</text>
+        <text x="540" y="540" fill="#94a3b8" font-size="8">finish_reason, usage: {in, out}, latency_ms</text>
+        <text x="540" y="556" fill="#94a3b8" font-size="8">model_used, circuit_state, circuit_trip</text>
+        <text x="540" y="572" fill="#34d399" font-size="8">-> driver never parses provider JSON</text>
+        <text x="540" y="588" fill="#94a3b8" font-size="8">backend normalizes its native response into this shape</text>
+      </svg>

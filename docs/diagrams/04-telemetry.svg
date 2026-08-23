@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 640">
+        <defs>
+          <marker id="04_telemetry__arrow-violet" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#a78bfa" />
+          </marker>
+          <marker id="04_telemetry__arrow-cyan" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#22d3ee" />
+          </marker>
+          <marker id="04_telemetry__arrow-emerald" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#34d399" />
+          </marker>
+          <marker id="04_telemetry__arrow-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#fbbf24" />
+          </marker>
+          <marker id="04_telemetry__arrow-rose" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#fb7185" />
+          </marker>
+          <pattern id="04_telemetry__grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+
+        <rect width="100%" height="100%" fill="url(#04_telemetry__grid)" />
+
+        <!-- Driver core -->
+        <rect x="380" y="40" width="240" height="80" rx="10" fill="rgba(120, 53, 15, 0.3)" stroke="#fbbf24" stroke-width="2"/>
+        <text x="500" y="66" fill="white" font-size="13" font-weight="700" text-anchor="middle">Driver.generate()</text>
+        <text x="500" y="84" fill="#94a3b8" font-size="9" text-anchor="middle">single call site</text>
+        <text x="500" y="100" fill="#fbbf24" font-size="8" text-anchor="middle">emits one TelemetryEvent</text>
+
+        <!-- TelemetryEvent -->
+        <rect x="350" y="160" width="300" height="100" rx="10" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="2"/>
+        <text x="500" y="186" fill="white" font-size="12" font-weight="700" text-anchor="middle">TelemetryEvent</text>
+        <text x="500" y="204" fill="#94a3b8" font-size="8" text-anchor="middle">route, model_used, latency_ms</text>
+        <text x="500" y="218" fill="#94a3b8" font-size="8" text-anchor="middle">attempts, circuit_state, circuit_trip</text>
+        <text x="500" y="232" fill="#94a3b8" font-size="8" text-anchor="middle">prompt_hash, tokens_in, tokens_out</text>
+        <text x="500" y="246" fill="#94a3b8" font-size="8" text-anchor="middle">hallucination_flag, error_class</text>
+
+        <path d="M 500 120 L 500 158" fill="none" stroke="#22d3ee" stroke-width="2" marker-end="url(#04_telemetry__arrow-cyan)"/>
+
+        <!-- Sink bus -->
+        <rect x="100" y="300" width="800" height="60" rx="10" fill="rgba(76, 29, 149, 0.3)" stroke="#a78bfa" stroke-width="2"/>
+        <text x="500" y="326" fill="white" font-size="12" font-weight="700" text-anchor="middle">TelemetrySink (fan-out bus)</text>
+        <text x="500" y="344" fill="#a78bfa" font-size="8" text-anchor="middle">each sink implements .emit(event) -> None; failures are isolated</text>
+
+        <path d="M 500 260 L 500 298" fill="none" stroke="#a78bfa" stroke-width="2" marker-end="url(#04_telemetry__arrow-violet)"/>
+
+        <!-- Sinks -->
+        <rect x="40" y="400" width="180" height="120" rx="10" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1.5"/>
+        <text x="130" y="426" fill="white" font-size="11" font-weight="700" text-anchor="middle">ConsoleSink</text>
+        <text x="130" y="446" fill="#34d399" font-size="8" text-anchor="middle">stdout (dev)</text>
+        <text x="130" y="464" fill="#94a3b8" font-size="8" text-anchor="middle">pretty JSON</text>
+        <text x="130" y="480" fill="#94a3b8" font-size="8" text-anchor="middle">level: INFO</text>
+        <text x="130" y="498" fill="#94a3b8" font-size="8" text-anchor="middle">zero deps</text>
+
+        <rect x="240" y="400" width="180" height="120" rx="10" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+        <text x="330" y="426" fill="white" font-size="11" font-weight="700" text-anchor="middle">OTelSink</text>
+        <text x="330" y="446" fill="#22d3ee" font-size="8" text-anchor="middle">OpenTelemetry</text>
+        <text x="330" y="464" fill="#94a3b8" font-size="8" text-anchor="middle">span per attempt</text>
+        <text x="330" y="480" fill="#94a3b8" font-size="8" text-anchor="middle">attributes = event</text>
+        <text x="330" y="498" fill="#94a3b8" font-size="8" text-anchor="middle">trace context</text>
+
+        <rect x="440" y="400" width="180" height="120" rx="10" fill="rgba(120, 53, 15, 0.3)" stroke="#fbbf24" stroke-width="1.5"/>
+        <text x="530" y="426" fill="white" font-size="11" font-weight="700" text-anchor="middle">LangfuseSink</text>
+        <text x="530" y="446" fill="#fbbf24" font-size="8" text-anchor="middle">Langfuse</text>
+        <text x="530" y="464" fill="#94a3b8" font-size="8" text-anchor="middle">generation + span</text>
+        <text x="530" y="480" fill="#94a3b8" font-size="8" text-anchor="middle">prompt + completion</text>
+        <text x="530" y="498" fill="#94a3b8" font-size="8" text-anchor="middle">user_id, session_id</text>
+
+        <rect x="640" y="400" width="180" height="120" rx="10" fill="rgba(136, 19, 55, 0.4)" stroke="#fb7185" stroke-width="1.5"/>
+        <text x="730" y="426" fill="white" font-size="11" font-weight="700" text-anchor="middle">FileSink</text>
+        <text x="730" y="446" fill="#fb7185" font-size="8" text-anchor="middle">JSONL file</text>
+        <text x="730" y="464" fill="#94a3b8" font-size="8" text-anchor="middle">rotated daily</text>
+        <text x="730" y="480" fill="#94a3b8" font-size="8" text-anchor="middle">gzipped archive</text>
+        <text x="730" y="498" fill="#94a3b8" font-size="8" text-anchor="middle">local audit trail</text>
+
+        <rect x="840" y="400" width="120" height="120" rx="10" fill="rgba(76, 29, 149, 0.3)" stroke="#a78bfa" stroke-width="1.5"/>
+        <text x="900" y="426" fill="white" font-size="11" font-weight="700" text-anchor="middle">Custom</text>
+        <text x="900" y="446" fill="#a78bfa" font-size="8" text-anchor="middle">plugin sink</text>
+        <text x="900" y="464" fill="#94a3b8" font-size="8" text-anchor="middle">user-defined</text>
+        <text x="900" y="480" fill="#94a3b8" font-size="8" text-anchor="middle">implements</text>
+        <text x="900" y="498" fill="#94a3b8" font-size="8" text-anchor="middle">.emit(event)</text>
+
+        <!-- Fan-out arrows -->
+        <path d="M 200 360 Q 200 380 130 398" fill="none" stroke="#34d399" stroke-width="1.5" marker-end="url(#04_telemetry__arrow-emerald)"/>
+        <path d="M 350 360 Q 350 380 330 398" fill="none" stroke="#22d3ee" stroke-width="1.5" marker-end="url(#04_telemetry__arrow-cyan)"/>
+        <path d="M 500 360 L 530 398" fill="none" stroke="#fbbf24" stroke-width="1.5" marker-end="url(#04_telemetry__arrow-amber)"/>
+        <path d="M 650 360 Q 650 380 730 398" fill="none" stroke="#fb7185" stroke-width="1.5" marker-end="url(#04_telemetry__arrow-rose)"/>
+        <path d="M 800 360 Q 800 380 900 398" fill="none" stroke="#a78bfa" stroke-width="1.5" marker-end="url(#04_telemetry__arrow-violet)"/>
+
+        <text x="60" y="560" fill="#94a3b8" font-size="8">Why fan-out: one source of truth in the driver, many destinations for ops, ML, and audit; adding a sink never touches the call site.</text>
+        <text x="60" y="574" fill="#94a3b8" font-size="8">Sink failures are caught and logged; a broken Langfuse export must not break the user's generation request.</text>
+        <text x="60" y="588" fill="#94a3b8" font-size="8">Sinks are registered at driver construction; tests inject a RecordingSink to assert on the exact event payload.</text>
+        <text x="60" y="602" fill="#94a3b8" font-size="8">PII scrubbing happens in the bus before fan-out, so sinks receive a redacted event by default.</text>
+      </svg>

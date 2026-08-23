@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 660">
+        <defs>
+          <marker id="03_fallback_chain__arrow-emerald" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#34d399" />
+          </marker>
+          <marker id="03_fallback_chain__arrow-amber" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#fbbf24" />
+          </marker>
+          <marker id="03_fallback_chain__arrow-rose" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#fb7185" />
+          </marker>
+          <marker id="03_fallback_chain__arrow-cyan" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#22d3ee" />
+          </marker>
+          <pattern id="03_fallback_chain__grid" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="0.5"/>
+          </pattern>
+        </defs>
+
+        <rect width="100%" height="100%" fill="url(#03_fallback_chain__grid)" />
+
+        <!-- Request entry -->
+        <rect x="370" y="30" width="260" height="50" rx="8" fill="rgba(8, 51, 68, 0.4)" stroke="#22d3ee" stroke-width="1.5"/>
+        <text x="500" y="50" fill="white" font-size="11" font-weight="600" text-anchor="middle">driver.generate("summarize", messages)</text>
+        <text x="500" y="66" fill="#94a3b8" font-size="8" text-anchor="middle">chain: [claude-3-5-sonnet, gpt-4o, llama-3.1-70b]</text>
+
+        <!-- Step 1: primary -->
+        <rect x="60" y="120" width="280" height="120" rx="10" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="2"/>
+        <text x="200" y="146" fill="white" font-size="12" font-weight="700" text-anchor="middle">Step 1: primary</text>
+        <text x="200" y="164" fill="#34d399" font-size="9" text-anchor="middle">claude-3-5-sonnet</text>
+        <text x="200" y="184" fill="#94a3b8" font-size="8" text-anchor="middle">check circuit: CLOSED</text>
+        <text x="200" y="200" fill="#94a3b8" font-size="8" text-anchor="middle">timeout: 30s, retry: 2</text>
+        <text x="200" y="218" fill="#fb7185" font-size="8" text-anchor="middle">result: TIMEOUT</text>
+
+        <!-- Step 2: fallback 1 -->
+        <rect x="360" y="120" width="280" height="120" rx="10" fill="rgba(120, 53, 15, 0.3)" stroke="#fbbf24" stroke-width="2"/>
+        <text x="500" y="146" fill="white" font-size="12" font-weight="700" text-anchor="middle">Step 2: fallback 1</text>
+        <text x="500" y="164" fill="#fbbf24" font-size="9" text-anchor="middle">gpt-4o</text>
+        <text x="500" y="184" fill="#94a3b8" font-size="8" text-anchor="middle">check circuit: OPEN (skip)</text>
+        <text x="500" y="200" fill="#94a3b8" font-size="8" text-anchor="middle">circuit_trip = true</text>
+        <text x="500" y="218" fill="#fb7185" font-size="8" text-anchor="middle">advance immediately</text>
+
+        <!-- Step 3: fallback 2 -->
+        <rect x="660" y="120" width="280" height="120" rx="10" fill="rgba(136, 19, 55, 0.4)" stroke="#fb7185" stroke-width="2"/>
+        <text x="800" y="146" fill="white" font-size="12" font-weight="700" text-anchor="middle">Step 3: fallback 2</text>
+        <text x="800" y="164" fill="#fb7185" font-size="9" text-anchor="middle">llama-3.1-70b</text>
+        <text x="800" y="184" fill="#94a3b8" font-size="8" text-anchor="middle">check circuit: CLOSED</text>
+        <text x="800" y="200" fill="#94a3b8" font-size="8" text-anchor="middle">timeout: 30s, retry: 2</text>
+        <text x="800" y="218" fill="#34d399" font-size="8" text-anchor="middle">result: SUCCESS</text>
+
+        <!-- Arrows between steps -->
+        <path d="M 340 180 L 358 180" fill="none" stroke="#fb7185" stroke-width="2" marker-end="url(#03_fallback_chain__arrow-rose)"/>
+        <text x="349" y="172" fill="#fb7185" font-size="7" text-anchor="middle">timeout</text>
+
+        <path d="M 640 180 L 658 180" fill="none" stroke="#fbbf24" stroke-width="2" marker-end="url(#03_fallback_chain__arrow-amber)"/>
+        <text x="649" y="172" fill="#fbbf24" font-size="7" text-anchor="middle">skip</text>
+
+        <!-- Response -->
+        <rect x="370" y="280" width="260" height="60" rx="8" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="2"/>
+        <text x="500" y="304" fill="white" font-size="11" font-weight="600" text-anchor="middle">Response</text>
+        <text x="500" y="322" fill="#34d399" font-size="9" text-anchor="middle">content + metadata + provenance</text>
+
+        <path d="M 800 240 Q 800 270 500 270 Q 500 270 500 278" fill="none" stroke="#34d399" stroke-width="2" marker-end="url(#03_fallback_chain__arrow-emerald)"/>
+
+        <!-- Metadata block -->
+        <rect x="60" y="370" width="880" height="180" rx="10" fill="rgba(15, 23, 42, 0.5)" stroke="#1e293b" stroke-width="1.5"/>
+        <text x="80" y="396" fill="white" font-size="11" font-weight="600">Response.metadata</text>
+        <text x="80" y="412" fill="#94a3b8" font-size="8">caller sees which model produced the answer and which were skipped</text>
+
+        <rect x="80" y="430" width="840" height="40" rx="6" fill="rgba(6, 78, 59, 0.4)" stroke="#34d399" stroke-width="1"/>
+        <text x="100" y="454" fill="white" font-size="9" font-weight="600">model_used: llama-3.1-70b</text>
+        <text x="350" y="454" fill="#94a3b8" font-size="9">route: summarize</text>
+        <text x="550" y="454" fill="#94a3b8" font-size="9">attempts: 2</text>
+        <text x="720" y="454" fill="#94a3b8" font-size="9">latency_ms: 4231</text>
+
+        <rect x="80" y="478" width="840" height="40" rx="6" fill="rgba(120, 53, 15, 0.3)" stroke="#fbbf24" stroke-width="1"/>
+        <text x="100" y="502" fill="white" font-size="9" font-weight="600">skipped: [gpt-4o (circuit OPEN)]</text>
+        <text x="400" y="502" fill="#94a3b8" font-size="9">fallback_chain_depth: 2</text>
+        <text x="650" y="502" fill="#94a3b8" font-size="9">circuit_trips: 1</text>
+
+        <rect x="80" y="526" width="840" height="20" rx="6" fill="rgba(136, 19, 55, 0.4)" stroke="#fb7185" stroke-width="1"/>
+        <text x="100" y="540" fill="white" font-size="9" font-weight="600">failed: [claude-3-5-sonnet (TIMEOUT)]</text>
+
+        <text x="60" y="590" fill="#94a3b8" font-size="8">Why chain (not parallel): full context travels with each attempt; the fallback sees the same prompt + system message the primary saw.</text>
+        <text x="60" y="604" fill="#94a3b8" font-size="8">Hallucination flag from the response validator counts as a failure and triggers advance, just like a timeout or HTTP error.</text>
+        <text x="60" y="618" fill="#94a3b8" font-size="8">If every model fails, the driver raises FallbackExhausted with the full attempts list attached for debugging.</text>
+      </svg>
