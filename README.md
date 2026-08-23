@@ -225,6 +225,14 @@ pip install -e ".[dev,all]"
 pytest
 ```
 
+## Routing patterns
+
+FacadeDriver supports multiple routing strategies per route. Pick the right one for the workload:
+
+<p align="center">
+  <img src="assets/routing-patterns.svg" alt="FacadeDriver routing patterns: round-robin, least-latency, weighted, and sticky-fallback" width="100%">
+</p>
+
 ## Benchmarks
 
 See [benchmarks/](benchmarks/) for latency, cost, and throughput comparisons
